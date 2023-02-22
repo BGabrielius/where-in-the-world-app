@@ -1,0 +1,21 @@
+.loadCountriesContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5em;
+}
+
+.loadCountriesElement {
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 16px;
+
+  color: var(--dark-gray);
+  transition: 0.25s ease-in;
+
+  border-radius: 12px;
+}
+
+.loadCountriesElement:hover {
+  cursor: pointer;
+}

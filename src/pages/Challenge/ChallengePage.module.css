@@ -1,0 +1,58 @@
+.wrapper {
+  max-width: 1440px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  min-width: 50%;
+  min-height: 50%;
+  border-radius: 8px;
+  padding: 2em 0.5em;
+}
+.startupSettings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 2em;
+}
+.difficultyContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding-top: 1em;
+  gap: 0.75em;
+}
+.difficultyContainer li {
+  padding: 0.3em 0;
+  font-size: 18px;
+
+  transition: 0.15s linear;
+}
+.difficultyContainer li:hover {
+  cursor: pointer;
+}
+.startChallenge {
+  transition: 0.2s linear;
+}
+.startChallenge:hover {
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
+.selectedLevel {
+  transform: scale(1.1);
+  padding: 1em;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.message {
+  color: var(--dark-gray);
+}
