@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import QuizAnswers from "../QuizAnswers";
+import ResultTracker from "../ResultTracker";
 
 import styledChallenges from "./Challenges.module.css";
 interface Props {
@@ -8,6 +10,7 @@ interface Props {
   updateCounter: () => void;
   counter: number;
   level: unknown;
+  cacheResults: (easy: any, medium?: any, difficult?: any) => void;
 }
 
 const Challenges: React.FC<Props> = ({
@@ -16,21 +19,36 @@ const Challenges: React.FC<Props> = ({
   counter,
   updateCounter,
   level,
+  cacheResults,
 }) => {
   // state
-  const [isMounted, setIsMounted] = useState(false);
   const [data, setData] = useState<any>(null);
   const [incorrectAnswers, setIncorrectAnswers] = useState<any>({
     easy: [],
     medium: [],
     difficult: [],
   });
-  const [correctAnswer, setCorrectAnswer] = useState({
+  const [correctAnswer, setCorrectAnswer] = useState<any>({
     easy: "",
     medium: "",
-    difficult: "",
+    difficult: 0,
   });
   const [currentStage, setCurrentStage] = useState<number>(1);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+
+  // refs
+  let svgUrl = useRef<string>("");
+
+  // motion
+  const motionH3 = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+    },
+  };
+
   // side effect
   useEffect(() => {
     if (challengeArr) {
@@ -42,10 +60,6 @@ const Challenges: React.FC<Props> = ({
         medium: data[counter]?.capital[0],
         difficult: data[counter]?.population,
       });
-
-      // console.log(data[0]?.flags.png, "dataaa");
-      // console.log(incorrectAnswers, "incorrect");
-      // console.log(correctAnswer, "correct");
     }
     if (correctAnswer.easy) {
       setIncorrectAnswers({
@@ -53,14 +67,29 @@ const Challenges: React.FC<Props> = ({
         medium: handleIncorrectAnswers(wrongArr, "medium"),
         difficult: handleIncorrectAnswers(wrongArr, "difficult"),
       });
-      setIsMounted(true);
+    }
+
+    // svg aspect ratio
+    if (data) {
+      if (svgUrl.current === data[counter]?.flags.svg) return;
+      svgUrl.current = data ? data[counter]?.flags.svg : "";
+      const img = new Image();
+
+      img.onload = () => {
+        const aspectRatio = img.width / img.height;
+        document.documentElement.style.setProperty(
+          "--aspect-ratio",
+          `${aspectRatio}`
+        );
+      };
+
+      img.src = svgUrl.current;
     }
   }, [challengeArr, data, counter, wrongArr, correctAnswer.easy]);
 
   // functions
   const handleIncorrectAnswers = (arr: any, difficulty: string) => {
     let prefixArr: any = [];
-    console.log(correctAnswer, "correctAnswer");
 
     arr.forEach((item: any) => {
       if (item.name.common !== correctAnswer.easy) {
@@ -70,7 +99,7 @@ const Challenges: React.FC<Props> = ({
           } else if (difficulty === "medium") {
             prefixArr.push(item.capital[0]);
           } else if (difficulty === "difficult") {
-            prefixArr.push(item.population);
+            prefixArr.push(formatPopulation(item.population));
           }
         }
       }
@@ -83,7 +112,6 @@ const Challenges: React.FC<Props> = ({
         incorrectAnswers.push(prefixArr[randomIndex]);
       }
     }
-    console.log(prefixArr, "hahahah");
     return incorrectAnswers;
   };
   const updateStage = () => {
@@ -108,61 +136,102 @@ const Challenges: React.FC<Props> = ({
     }
   };
 
+  const handleResultValidation = (isCorrect: boolean | null) => {
+    setIsCorrect(isCorrect);
+  };
+  const formatPopulation = (population: number) => {
+    return population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <div className={styledChallenges.wrapper}>
       <div className={styledChallenges.container}>
         {data && (
           <>
-            <div className={`${styledChallenges.imgContainer} img-container`}>
-              <img src={data[counter]?.flags.png} alt="" />
+            <div className={styledChallenges.resultimgWrapper}>
+              <div className={styledChallenges.resultTrackerWrapper}>
+                <ResultTracker
+                  difficulty={level}
+                  questionIndex={counter}
+                  questionStage={currentStage}
+                  isCorrect={isCorrect}
+                  cacheResults={cacheResults}
+                />
+              </div>
+              <div className={styledChallenges.imgWrapper}>
+                <motion.div
+                  className={`${styledChallenges.imgContainer} img-container`}
+                  initial={{ scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  transition={{ delay: 0.1 }}
+                  key={counter}
+                >
+                  <img
+                    src={data[counter]?.flags.svg}
+                    key={data[counter]?.flags.svg}
+                    alt=""
+                    className="quiz-img"
+                  />
+                </motion.div>
+              </div>
             </div>
+
             {currentStage === 1 && (
               <>
-                <h3 className={styledChallenges.challengeHeadline}>
+                <motion.h3
+                  className={styledChallenges.challengeHeadline}
+                  variants={motionH3}
+                  initial="initial"
+                  animate="animate"
+                >
                   Select the name of the country that represents this flag
-                </h3>
+                </motion.h3>
                 {correctAnswer && incorrectAnswers && (
                   <QuizAnswers
                     correct={correctAnswer.easy}
                     incorrect={incorrectAnswers.easy}
                     updateStage={updateStage}
-                    difficulty={level}
-                    questionIndex={counter}
-                    questionStage={currentStage}
+                    handleResults={handleResultValidation}
                   />
                 )}
               </>
             )}
             {level !== "easy" && currentStage === 2 && (
               <>
-                <h3 className={styledChallenges.challengeHeadline}>
+                <motion.h3
+                  className={styledChallenges.challengeHeadline}
+                  variants={motionH3}
+                  initial="initial"
+                  animate="animate"
+                >
                   Select the capital city of this country
-                </h3>
+                </motion.h3>
                 {correctAnswer && incorrectAnswers && (
                   <QuizAnswers
                     correct={correctAnswer.medium}
                     incorrect={incorrectAnswers.medium}
                     updateStage={updateStage}
-                    difficulty={level}
-                    questionIndex={counter}
-                    questionStage={currentStage}
+                    handleResults={handleResultValidation}
                   />
                 )}
               </>
             )}
             {level === "difficult" && currentStage === 3 && (
               <>
-                <h3 className={styledChallenges.challengeHeadline}>
+                <motion.h3
+                  className={styledChallenges.challengeHeadline}
+                  variants={motionH3}
+                  initial="initial"
+                  animate="animate"
+                >
                   Select the approximate population of this country
-                </h3>
+                </motion.h3>
                 {correctAnswer && incorrectAnswers && (
                   <QuizAnswers
-                    correct={correctAnswer.difficult}
+                    correct={formatPopulation(correctAnswer.difficult)}
                     incorrect={incorrectAnswers.difficult}
                     updateStage={updateStage}
-                    difficulty={level}
-                    questionIndex={counter}
-                    questionStage={currentStage}
+                    handleResults={handleResultValidation}
                   />
                 )}
               </>

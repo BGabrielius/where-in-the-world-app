@@ -16,24 +16,45 @@
   width: 100%;
   height: 100%;
   max-width: 1440px;
-  gap: 2em;
+  gap: 0.5em;
 }
+.resultimgWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
+  width: 80%;
+  height: auto;
+  gap: 1em;
+}
+.resultTrackerWrapper {
+  min-width: 350px;
+
+  margin-top: 0.4em;
+}
+.imgWrapper {
+  width: 100%;
+}
 .imgContainer {
   border-radius: 4px;
-  height: 100%;
-  width: 50%;
-
-  min-width: 300px;
-  min-height: 250px;
 
   position: relative;
+
+  width: 100%;
+  height: auto;
+
+  padding-bottom: calc(100% / var(--aspect-ratio));
 }
+
 .imgContainer img {
   height: 100%;
   width: 100%;
 
-  min-width: 300px;
+  border-radius: 4px;
+
+  object-fit: cover;
+  object-position: center;
 
   top: 0;
   left: 0;
@@ -43,35 +64,88 @@
   position: absolute;
 }
 .challengeHeadline {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.25px;
 
   max-width: 350px;
 }
 
-@media screen and (min-width: 768px) {
-  .imgContainer {
-    min-height: 325px;
+@media screen and (min-width: 500px) {
+  .imgWrapper {
+    width: 88%;
   }
+}
+@media screen and (min-width: 600px) {
+  .resultimgWrapper {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .resultimgWrapper {
+    width: 55%;
+  }
+
   .challengeHeadline {
     max-width: 400px;
   }
 }
-@media screen and (min-width: 1024px) {
-  .imgContainer {
-    min-height: 375px;
+@media screen and (min-width: 850px) {
+  .resultimgWrapper {
+    width: 50%;
   }
+}
+@media screen and (min-width: 940px) {
+  .resultimgWrapper {
+    width: 45%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .container {
+    margin-top: 2em;
+  }
+  .imgWrapper {
+    width: 70%;
+
+    display: flex;
+    justify-content: center;
+  }
+
   .challengeHeadline {
     max-width: 450px;
   }
+  .resultimgWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+    width: 60%;
+
+    margin-top: 0.5em;
+
+    margin-right: 110px;
+  }
+  .resultTrackerWrapper {
+    width: 10%;
+    height: 350px;
+    min-width: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+  }
 }
 @media screen and (min-width: 1280px) {
-  .imgContainer {
-    min-height: 425px;
-  }
   .challengeHeadline {
     max-width: 500px;
-    font-size: 28px;
+    font-size: 24px;
+  }
+}
+
+@media screen and (min-height: 880px) {
+  .imgWrapper {
+    width: 95%;
   }
 }
