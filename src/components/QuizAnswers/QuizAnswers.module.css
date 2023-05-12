@@ -23,7 +23,7 @@
 
   font-weight: 600;
 
-  transition: 0.3s linear;
+  transition: transform 0.3s linear;
 
   position: relative;
 }
@@ -35,8 +35,8 @@
   left: 1%;
   transform: translate(-50%, -50%);
   width: 10px;
-  height: 45px;
-  border-radius: 5%;
+  height: 105%;
+  border-radius: 3px;
 }
 .quizBtn::before {
   content: "";
@@ -46,8 +46,8 @@
   left: 99%;
   transform: translate(-50%, -50%);
   width: 10px;
-  height: 45px;
-  border-radius: 5%;
+  height: 105%;
+  border-radius: 3px;
 }
 
 .quizBtn:hover {
@@ -55,29 +55,32 @@
 }
 .selectedCorrect {
   border: 2px solid green;
-  /* animation: pulse; */
 }
 .selectedCorrect::after,
 .selectedCorrect::before {
-  background-color: green;
+  background-color: green !important;
 }
 .selectedIncorrect {
   border: 2px solid rgb(255, 89, 89);
 }
 .selectedIncorrect::after,
 .selectedIncorrect::before {
-  background-color: rgb(255, 89, 89);
+  background-color: rgb(255, 89, 89) !important;
+}
+.forwardBtnContainer {
+  margin-top: 0.5em;
+
+  height: 39px;
 }
 .forwardBtn {
   border-radius: 3px;
   padding: 0.75em 1.25em;
 
   border: none;
-  margin-top: 1.25em;
 
   cursor: pointer;
 
-  transition: 0.3s linear;
+  transition: transform 0.3s linear;
 }
 .forwardBtn:hover {
   transform: scale(1.1);
@@ -103,10 +106,4 @@
     padding: 0.5em 2em;
     font-size: 20px;
   }
-  .quizBtn::after,
-  .quizBtn::before {
-    height: 50px;
-  }
 }
-
-/* keyframes */

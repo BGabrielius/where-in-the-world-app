@@ -1,16 +1,14 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import styledQuizAnswers from "./QuizAnswers.module.css";
 
-import { DoubleArrowRightIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import ResultTracker from "../ResultTracker";
+import { DoubleArrowRightIcon } from "@radix-ui/react-icons";
 
 interface Props {
   correct: string | number;
   incorrect: any;
   updateStage: () => void;
-  difficulty: unknown;
-  questionIndex: number;
-  questionStage: number;
+  handleResults: (isCorrect: boolean | null) => void;
 }
 interface Answer {
   value: any;
@@ -21,9 +19,7 @@ const QuizAnswers: React.FC<Props> = ({
   correct,
   incorrect,
   updateStage,
-  difficulty,
-  questionIndex,
-  questionStage,
+  handleResults,
 }) => {
   // state
   const [answers, setAnswers] = useState<Answer[]>([]);
@@ -31,39 +27,32 @@ const QuizAnswers: React.FC<Props> = ({
 
   // side effects
   React.useEffect(() => {
-    setAnswers(
-      [
-        ...incorrect.map((value: any) => ({ value, isCorrect: false })),
-        { value: correct, isCorrect: true },
-      ].sort(() => Math.random() - 0.5)
-    );
-
-    if (answers) {
-      // console.log(answers, "yeet");
-      // console.log(selectedAnswer, "selectedAnswer");
-    }
-    if (selectedAnswer) {
+    if (correct) {
+      setAnswers(
+        [
+          ...incorrect.map((value: any) => ({ value, isCorrect: false })),
+          { value: correct, isCorrect: true },
+        ].sort(() => Math.random() - 0.5)
+      );
     }
   }, [correct, incorrect]);
 
   // functions
   const handleAnswers = (answer: Answer) => {
+    handleResults(answer.isCorrect);
     setSelectedAnswer(answer);
-    // updateCounter();
-    // updateStage();
-    // console.log(answer, "answer");
   };
   const handleForward = () => {
+    handleResults(null);
     setSelectedAnswer(null);
     updateStage();
   };
-  console.log(selectedAnswer, "selectedAnswer");
   return (
     <>
       <div className={styledQuizAnswers.container}>
         <div className={styledQuizAnswers.btnContainer}>
           {answers.map((answer) => (
-            <button
+            <motion.button
               key={answer.value + answer.isCorrect}
               onClick={() => handleAnswers(answer)}
               className={`${styledQuizAnswers.quizBtn} quiz-btn ${
@@ -81,27 +70,28 @@ const QuizAnswers: React.FC<Props> = ({
             }
             `}
               disabled={selectedAnswer ? true : false}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
             >
               {answer.value}
-            </button>
+            </motion.button>
           ))}
         </div>
-        {selectedAnswer && (
-          <button
-            onClick={handleForward}
-            className={`${styledQuizAnswers.forwardBtn} levelBtn`}
-          >
-            <DoubleArrowRightIcon className={styledQuizAnswers.forwardIcon} />
-          </button>
-        )}
-      </div>
 
-      <ResultTracker
-        difficulty={difficulty}
-        questionIndex={questionIndex}
-        questionStage={questionStage}
-        isCorrect={selectedAnswer?.isCorrect}
-      />
+        <div className={styledQuizAnswers.forwardBtnContainer}>
+          {selectedAnswer && (
+            <motion.button
+              animate={{ scale: [0, 1.5, 1.5, 1] }}
+              transition={{ type: "tween", duration: 0.5 }}
+              initial={{ scale: 0 }}
+              onClick={handleForward}
+              className={`${styledQuizAnswers.forwardBtn} element-full`}
+            >
+              <DoubleArrowRightIcon className={styledQuizAnswers.forwardIcon} />
+            </motion.button>
+          )}
+        </div>
+      </div>
     </>
   );
 };
