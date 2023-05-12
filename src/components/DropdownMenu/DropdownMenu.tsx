@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import styledDropdown from "./DropdownMenu.module.css";
+import { motion } from "framer-motion";
 
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
@@ -8,29 +9,30 @@ interface Props {
   isChallenge: boolean;
   filterName: string;
   handleFilter: (e: any) => void;
+  isOpen?: () => void;
 }
 
 const DropdownMenu: React.FC<Props> = ({
   isChallenge,
   filterName,
   handleFilter,
+  isOpen,
 }) => {
   // state
   const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<number>(0);
   const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
-  // const [selectedOptionName, setSelectedOptionName] = useState<string>("");
 
   const optionsList = isChallenge
     ? ["All", "Africa", "Asia", "Americas", "Europe", "Oceania"]
     : ["Africa", "Asia", "Americas", "Europe", "Oceania"];
 
-  // side effects
-
   // functions
-
   const toggleOptions = () => {
     setIsOptionsOpen(!isOptionsOpen);
+    if (isOpen) {
+      isOpen();
+    }
   };
 
   const setSelectedThenCloseDropdown = (index: number) => {
@@ -40,7 +42,9 @@ const DropdownMenu: React.FC<Props> = ({
       handleFilter(optionsList[index]);
       setSelectedOption(index);
       setIsOptionsOpen(false);
-      // setSelectedOptionName(optionsList[index]);
+      if (isOpen) {
+        isOpen();
+      }
     }
   };
 
@@ -63,18 +67,6 @@ const DropdownMenu: React.FC<Props> = ({
         e.preventDefault();
         setIsOptionsOpen(false);
         break;
-      // case "ArrowUp":
-      //   e.preventDefault();
-      //   setSelectedOption(
-      //     selectedOption - 1 >= 0 ? selectedOption - 1 : optionsList.length - 1
-      //   );
-      //   break;
-      // case "ArrowDown":
-      //   e.preventDefault();
-      //   setSelectedOption(
-      //     selectedOption == optionsList.length - 1 ? 0 : selectedOption + 1
-      //   );
-      //   break;
       default:
         break;
     }
@@ -87,17 +79,41 @@ const DropdownMenu: React.FC<Props> = ({
           type="button"
           aria-haspopup="listbox"
           aria-expanded={isOptionsOpen}
-          className={`filter-region-button ${styledDropdown.button} ${
+          className={`region-filter-container ${styledDropdown.button} ${
             isOptionsOpen ? styledDropdown.expanded : ""
           }`}
           onClick={toggleOptions}
           onKeyDown={handleListKeyDown}
         >
           {isFirstLoad ? filterName : optionsList[selectedOption]}
-          {isOptionsOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+          {isOptionsOpen ? (
+            <motion.span
+              initial={{ y: 0, opacity: 1 }}
+              animate={{ y: [-20, 0], opacity: [0, 1] }}
+              exit={{ y: 20, opacity: 0 }}
+            >
+              <IoIosArrowDown />
+            </motion.span>
+          ) : (
+            <motion.span
+              initial={{ y: 0, opacity: 1 }}
+              animate={{ y: [20, 0], opacity: [0, 1] }}
+              exit={{ y: -20, opacity: 0 }}
+            >
+              <IoIosArrowUp />
+            </motion.span>
+          )}
         </button>
-        <ul
-          className={`filter-region-ul ${styledDropdown.optionsList} ${
+        <motion.ul
+          initial={{ scaleY: 0, opacity: 1 }}
+          animate={{
+            scaleY: isOptionsOpen ? [0, 1] : [1, 0],
+            opacity: [0, 1],
+          }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3 }}
+          style={{ transformOrigin: "top", overflow: "hidden" }}
+          className={`region-filter-container ${styledDropdown.optionsList} ${
             isOptionsOpen ? styledDropdown.show : ""
           }`}
           role="listbox"
@@ -106,7 +122,12 @@ const DropdownMenu: React.FC<Props> = ({
           onKeyDown={handleListKeyDown}
         >
           {optionsList.map((option, index) => (
-            <li
+            <motion.li
+              whileInView={{ y: [-10 * index, 0], opacity: [0, 1] }}
+              initial={{ y: 0, opacity: 0 }}
+              transition={{ delay: 0.08 * index }}
+              viewport={{ once: true }}
+              exit={{ y: -10 }}
               key={option}
               id={option}
               role="option"
@@ -114,16 +135,16 @@ const DropdownMenu: React.FC<Props> = ({
               tabIndex={0}
               onKeyDown={handleKeyDown(index)}
               onClick={() => setSelectedThenCloseDropdown(index)}
-              className={`filter-region-option ${styledDropdown.option} ${
+              className={`${styledDropdown.option} ${
                 selectedOption === index &&
                 isFirstLoad === false &&
                 styledDropdown.selectedOption
               }`}
             >
               {option}
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
       </div>
     </div>
   );
