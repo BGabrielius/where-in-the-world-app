@@ -1,0 +1,15 @@
+.btn {
+  border: none;
+  padding: 0.25em 0.75em;
+  font-size: 18px;
+  font-weight: 700;
+  width: 50%;
+  border-radius: 4px;
+  letter-spacing: 2px;
+  transition: linear 0.35s;
+}
+
+.btn:hover {
+  cursor: pointer;
+  width: 80%;
+}
