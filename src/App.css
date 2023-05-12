@@ -9,265 +9,199 @@
 }
 
 /* Light & Dark */
-/*-- main background color --*/
+/* 
+ --dark-blue - Dark Mode Elements 
+ --very-dark-blue-1 - Dark Mode Background 
+
+ --very-dark-blue-2 - Light Mode Text 
+ --very-light-gray - Light Mode Background 
+
+ --white - Dark Mode Text & Light Mode Elements 
+
+ --dark-gray - Universal 
+
+*/
+/*-- Theme Defaults --*/
+/*--- Light Mode ---*/
+#light {
+  background-color: var(--white);
+  color: var(--very-dark-blue-2);
+  box-shadow: 0 0 3px 3px rgb(233, 233, 233);
+}
+/*--- Dark Mode ---*/
+#dark {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  box-shadow: 0 0 3px 3px hsl(209, 22%, 34%);
+}
+
+/* Universal theme classes */
 /* Light Mode */
+#light .element-border {
+  border: 1px solid rgb(233, 233, 233);
+}
+#light .element-full {
+  background-color: var(--white);
+  color: var(--very-dark-blue-2);
+  box-shadow: 0 0 3px 3px rgb(233, 233, 233);
+}
+/* Dark Mode */
+#dark .element-border {
+  border: 1px solid hsl(209, 22%, 34%);
+}
+#dark .element-full {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  box-shadow: 0 0 3px 3px hsl(209, 22%, 34%);
+}
+/*-- main background color --*/
+/*--- Light Mode ---*/
 #light main {
   background-color: var(--very-light-gray);
 }
 
-/* Dark Mode */
+/*--- Dark Mode ---*/
 #dark main {
   background-color: var(--very-dark-blue-1);
 }
 
-/*-- Header --*/
-/* Light Mode */
-#light header nav {
-  background-color: var(--white);
-}
-#light a .mainHeadline {
-  color: var(--very-dark-blue-2);
-}
-#light .modeText {
-  color: var(--very-dark-blue-2);
-}
-
-/* Dark Mode */
-#dark header nav {
-  background-color: var(--dark-blue);
-}
-#dark a .mainHeadline {
-  color: var(--white);
-}
-#dark .modeText {
-  color: var(--white);
-}
-
-/*-- HomePage --*/
-/* Light Mode */
-#light .route {
-  background-color: var(--white);
-}
-#light main nav ul li a {
-  color: var(--very-dark-blue-2);
-}
-#light main nav ul li .routeIconBackground {
-  color: var(--very-dark-blue-2);
-}
-
-/* Dark Mode */
-#dark .route {
-  background-color: var(--dark-blue);
-}
-#dark main nav ul li a {
-  color: var(--white);
-}
-#dark main nav ul li .routeIconBackground {
-  color: var(--white);
-}
-
 /*-- LibraryPage --*/
-/* Light Mode */
-#light main div .countryShadow {
-  box-shadow: 0.5px 1px rgb(233, 233, 233), -0.5px 0 rgb(233, 233, 233);
-}
-#light main div .countryShadow:hover {
-  box-shadow: 0 0 10px 5px rgb(233, 233, 233);
-}
-#light main div div .countrySumm {
-  background-color: var(--white);
-}
-#light main div div .countrySumm h3 {
-  color: var(--very-dark-blue-2);
-}
-#light main div div .countrySumm p {
-  color: var(--very-dark-blue-2);
-}
-#light main div div .countrySumm b {
-  color: var(--very-dark-blue-2);
-}
-#light main div div .filter {
+/*--- Light Mode ---*/
+/*---- Filters ----*/
+/*----- Search -----*/
+#light .search-filter-container {
   background-color: var(--white);
   box-shadow: 0 0 10px 5px rgb(233, 233, 233);
-}
-#light main div div div .magnifyingGlass {
-  color: var(--very-dark-blue-2);
-}
-#light main div div div .searchInput {
-  background-color: var(--white);
-  color: var(--very-dark-blue-2);
 }
 #light ::placeholder {
   color: var(--dark-gray);
 }
-#light .filter-region-ul,
-#light .filter-region-button {
+
+/*----- Region -----*/
+#light .region-filter-container {
   box-shadow: 0 0 10px 5px rgb(233, 233, 233);
   background-color: var(--white);
   color: var(--very-dark-blue-2);
 }
-#light .filter-region-option {
-  color: var(--very-dark-blue-2);
+
+/*---- Country cards (item list) ----*/
+#light .country-card-container {
+  box-shadow: 0.5px 1px rgb(233, 233, 233), -0.5px 0 rgb(233, 233, 233);
 }
-#light .error-msg {
-  color: var(--very-dark-blue-2);
+#light .country-card-container:hover {
+  box-shadow: 0 0 10px 5px rgb(233, 233, 233);
 }
-#light .load-countries-btn {
-  background-color: var(--very-light-gray);
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  border-bottom: 3px solid var(--white);
-}
-#light .load-countries-btn:hover {
-  color: var(--very-dark-blue-2);
-  border-color: var(--very-dark-blue-2);
+#light .country-card-summary {
+  background-color: var(--white);
 }
 
-/* Dark Mode */
-#dark main div .countryShadow {
-  box-shadow: 0.5px 1px hsl(209, 22%, 34%), -0.5px 0 hsl(209, 23%, 22%);
+/*---- Pagination ----*/
+#light .pagination-container {
+  box-shadow: 0 0 10px 5px rgb(233, 233, 233);
+  background-color: var(--white);
 }
-#dark main div .countryShadow:hover {
-  box-shadow: 0 0 8px 2px hsl(209, 22%, 34%);
+#light .prev-next-btn {
+  background-color: var(--very-light-gray);
+  color: var(--very-dark-blue-2) !important;
 }
-#dark main div div .countrySumm {
-  background-color: var(--dark-blue);
-}
-#dark main div div .countrySumm h3 {
-  color: var(--white);
-}
-#dark main div div .countrySumm p {
-  color: var(--white);
-}
-#dark main div div .countrySumm b {
-  color: var(--white);
-}
-#dark main div div .filter {
+
+/*--- Dark Mode ---*/
+/*---- Filters- ----*/
+/*----- Search -----*/
+#dark .search-filter-container {
   background-color: var(--dark-blue);
   box-shadow: 0 0 8px 2px hsl(209, 22%, 34%);
-}
-#dark main div div div .magnifyingGlass {
-  color: var(--white);
-}
-#dark main div div div .searchInput {
-  background-color: var(--dark-blue);
-  color: var(--white);
 }
 #dark ::placeholder {
   color: var(--white);
 }
-#dark .filter-region-button,
-#dark .filter-region-ul {
+
+/*----- Region -----*/
+#dark .region-filter-container {
   box-shadow: 0 0 8px 2px hsl(209, 22%, 34%);
   background-color: var(--dark-blue);
   color: var(--white);
 }
-#dark .filter-region-option {
-  color: var(--white);
+
+/*---- Country cards (item list) ----*/
+#dark .country-card-container {
+  box-shadow: 0.5px 1px hsl(209, 22%, 34%), -0.5px 0 hsl(209, 23%, 22%);
 }
-/* .filter-region-option:active,
-.filter-region-option:focus,
-.filter-region-option:hover {
-  animation: border-light-up 1s ease-in;
-} */
-#dark .error-msg {
-  color: var(--white);
+#dark .country-card-container:hover {
+  box-shadow: 0 0 8px 2px hsl(209, 22%, 34%);
 }
-#dark .load-countries-btn {
+#dark .country-card-summary {
+  background-color: var(--dark-blue);
+}
+
+/*---- Pagination ----*/
+#dark .pagination-container {
+  box-shadow: 0 0 8px 2px hsl(209, 22%, 34%);
+  background-color: var(--dark-blue);
+}
+#dark .prev-next-btn {
   background-color: var(--very-dark-blue-1);
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  border-bottom: 3px solid var(--dark-blue);
-}
-#dark .load-countries-btn:hover {
-  color: var(--white);
-  border-color: var(--white);
+  color: var(--white) !important;
 }
 
 /*-- LibraryItemPage --*/
-/* Light Mode */
-#light .item-page-btn {
+/*--- Light Mode ---*/
+/*---- button (back) ----*/
+#light .btn-back {
   background-color: var(--white);
   box-shadow: 0 0 10px 5px rgb(233, 233, 233);
 }
-#light .item-page-btn:first-child {
-  color: var(--very-dark-blue-2);
-}
-#light .info-container h2 {
-  color: var(--very-dark-blue-2);
-}
-#light .info-container div span b,
-#light .info-container div span p {
-  color: var(--very-dark-blue-2);
-}
+
+/*---- img ----*/
 #light .img-container {
   box-shadow: 0 0 3px 6px rgb(233, 233, 233);
 }
+/*---- map ----*/
 #light .map-container {
   box-shadow: 0 0 3px 6px rgb(233, 233, 233);
 }
-#light .country-borders-b {
-  color: var(--very-dark-blue-2);
-}
-#light .country-borders-span {
+
+/*---- shared borders container ----*/
+#light .country-borders-container {
   background-color: var(--white);
   color: var(--very-dark-blue-2);
   box-shadow: 0 0 3px 3px rgb(233, 233, 233);
 }
 
-/* Dark Mode */
-#dark .item-page-btn {
+/*--- Dark Mode ---*/
+/*---- button (back) ----*/
+#dark .btn-back {
   background-color: var(--dark-blue);
   box-shadow: 0 0 8px 2px hsl(209, 22%, 34%);
 }
-#dark .item-page-btn:first-child {
-  color: var(--white);
-}
-#dark .info-container h2 {
-  color: var(--white);
-}
-#dark .info-container div span b,
-#dark .info-container div span p {
-  color: var(--white);
-}
+
+/*---- img ----*/
 #dark .img-container {
   box-shadow: 0 0 3px 6px hsl(209, 22%, 34%);
 }
+/*---- map ----*/
 #dark .map-container {
   box-shadow: 0 0 3px 6px hsl(209, 22%, 34%);
 }
-#dark .country-borders-b {
-  color: var(--white);
-}
-#dark .country-borders-span {
+
+/*---- shared borders container ----*/
+#dark .country-borders-container {
   background-color: var(--dark-blue);
   color: var(--white);
   box-shadow: 0 0 3px 3px hsl(209, 22%, 34%);
 }
 
 /* ----------------------- */
-/* Challenge page */
-/* Light mode */
-#light .universal-color-swap {
-  color: var(--very-dark-blue-2);
-}
-#light .startupContainer {
-  background-color: var(--white);
-  box-shadow: 0 0 3px 3px rgb(233, 233, 233);
-}
+/*-- Challenge page --*/
+/*--- Empty ---*/
 
-#light .levelBtn {
-  background-color: var(--white);
-  color: var(--very-dark-blue-2);
-  box-shadow: 0 0 3px 3px rgb(233, 233, 233);
+/*-- Quiz page --*/
+/*--- Light mode ---*/
+/*---- Quiz img ----*/
+#light .quiz-img {
+  border: 1px solid var(--light-gray);
 }
-#light {
-  background-color: var(--white);
-  color: var(--very-dark-blue-2);
-  box-shadow: 0 0 3px 3px rgb(233, 233, 233);
-}
+/*---- Quiz btn ----*/
 #light .quiz-btn {
   background-color: var(--white);
   color: var(--very-dark-blue-2);
@@ -276,24 +210,20 @@
 #light .quiz-btn:hover::after {
   background-color: rgb(233, 233, 233);
 }
-/* Dark mode */
-#dark .universal-color-swap {
-  color: var(--white);
+/*---- Result Tracker ----*/
+#light .numeric-stage-filler {
+  border-right: 1px solid rgb(233, 233, 233);
 }
-#dark .startupContainer {
-  background-color: var(--dark-blue);
-  box-shadow: 0 0 3px 3px hsl(209, 22%, 34%);
+/*---- Quiz Results ----*/
+#light .results-item-container {
+  border-bottom: 1px solid var(--dark-gray);
 }
-#dark .levelBtn {
-  background-color: var(--dark-blue);
-  color: var(--white);
-  box-shadow: 0 0 3px 3px hsl(209, 22%, 34%);
+/*--- Dark mode ---*/
+/*---- Quiz img ----*/
+#dark .quiz-img {
+  border: 1px solid var(--dark-gray);
 }
-#dark {
-  background-color: var(--dark-blue);
-  color: var(--white);
-  box-shadow: 0 0 3px 3px hsl(209, 22%, 34%);
-}
+/*---- Quiz btn ----*/
 #dark .quiz-btn {
   background-color: var(--dark-blue);
   color: var(--white);
@@ -302,27 +232,11 @@
 #dark .quiz-btn:hover::after {
   background-color: hsl(209, 22%, 34%);
 }
-/*-- key frames --*/
-
-.App {
-  text-align: center;
+/*---- Result Tracker ----*/
+#dark .numeric-stage-filler {
+  border-right: 1px solid hsl(209, 22%, 34%);
 }
-main {
-  padding: 0.75em 1em;
-}
-
-@media screen and (min-width: 768px) {
-  main {
-    padding: 0.75em 1.5em;
-  }
-}
-@media screen and (min-width: 1024px) {
-  main {
-    padding: 0.75em 2em;
-  }
-}
-@media screen and (min-width: 1280px) {
-  main {
-    padding: 0.75em 3em;
-  }
+/*---- Quiz Results ----*/
+#dark .results-item-container {
+  border-bottom: 1px solid hsl(209, 22%, 34%);
 }
