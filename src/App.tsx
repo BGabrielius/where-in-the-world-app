@@ -21,12 +21,9 @@ const ChallengePage = React.lazy(() => import("./pages/Challenge"));
 const QuizPage = React.lazy(() => import("./pages/Quiz"));
 
 const App: React.FC = () => {
-  // variables
-
   // State
   const [cookies, setCookie] = useCookies(["theme"]);
   const [theme, setTheme] = useState<ThemeContextType>(cookies.theme || "dark");
-  // const [themeDialog, setThemeDialog] = useState<boolean>(false);
 
   // location
   const location = useLocation();
@@ -50,18 +47,10 @@ const App: React.FC = () => {
     setCookie("theme", newTheme);
   };
 
-  // const showDialog = () => {
-  //   setThemeDialog(themeDialog === false ? true : false);
-  // };
-
   return (
     <ThemeContext.Provider value={theme}>
       <div className="App" id={theme}>
-        <Header
-          mode={theme}
-          onToggle={toggleTheme}
-          // showDialog={() => showDialog}
-        />
+        <Header mode={theme} onToggle={toggleTheme} />
         <Suspense fallback={<main></main>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
