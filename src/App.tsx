@@ -1,5 +1,6 @@
-import React, { Suspense, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { Suspense, useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import { createContext } from "react";
 
@@ -19,21 +20,49 @@ const LibraryItemPage = React.lazy(() => import("./pages/LibraryItem"));
 const ChallengePage = React.lazy(() => import("./pages/Challenge"));
 const QuizPage = React.lazy(() => import("./pages/Quiz"));
 
-// export const ThemeContext = createContext<unknown>(null);
-
 const App: React.FC = () => {
+  // variables
+
   // State
-  const [theme, setTheme] = useState<ThemeContextType>("light");
+  const [cookies, setCookie] = useCookies(["theme"]);
+  const [theme, setTheme] = useState<ThemeContextType>(cookies.theme || "dark");
+  // const [themeDialog, setThemeDialog] = useState<boolean>(false);
+
+  // location
+  const location = useLocation();
+
+  // side effects
+  useEffect(() => {
+    const isHomePage = location.pathname === "/";
+    if (isHomePage) {
+      setTheme("dark");
+      setCookie("theme", "dark");
+    } else {
+      const savedTheme = cookies.theme;
+      setTheme(savedTheme || "dark");
+    }
+  }, [cookies, window.location.pathname, theme]);
 
   // Functions
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    setCookie("theme", newTheme);
   };
+
+  // const showDialog = () => {
+  //   setThemeDialog(themeDialog === false ? true : false);
+  // };
+
   return (
     <ThemeContext.Provider value={theme}>
       <div className="App" id={theme}>
-        <Header mode={theme} onToggle={toggleTheme} />
-        <Suspense fallback={<div>Loading...</div>}>
+        <Header
+          mode={theme}
+          onToggle={toggleTheme}
+          // showDialog={() => showDialog}
+        />
+        <Suspense fallback={<main></main>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/library" element={<LibraryPage />} />
