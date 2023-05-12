@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import ReactDom from "react-dom";
 
 import styledDescription from "./DescriptionPopup.module.css";
@@ -20,8 +21,6 @@ const DescriptionPopup: React.FC<Props> = ({
   theme,
   refs,
 }) => {
-  // state
-
   // refs
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -54,17 +53,27 @@ const DescriptionPopup: React.FC<Props> = ({
   }, [onClose]);
   return ReactDom.createPortal(
     <>
-      <div ref={modalRef} id={theme} className={`${styledDescription.wrapper}`}>
-        <div className={styledDescription.container}>
+      <motion.div
+        animate={{ scale: [0, 1] }}
+        transition={{ type: "tween", duration: 0.75 }}
+        initial={{ scale: 0 }}
+        ref={modalRef}
+        id={theme}
+        className={`${styledDescription.wrapper}`}
+      >
+        <motion.div
+          className={styledDescription.container}
+          animate={{ x: [150, 0], scale: [0, 1] }}
+          transition={{ type: "tween", delay: 0.4 }}
+          initial={{ x: 150, scale: 0 }}
+        >
           <p>{description}</p>
           <p>
-            Note: further difficulties are unlocked once you've completed the
-            previous difficulty on all regions. Check your profile for more
-            information.
+            Note: each difficulty will always contain questions on 10 countries,
+            the only difference is the number of questions per country.
           </p>
-          <p>Note: anwsers are not case sensitive</p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </>,
     document.getElementById("portal") as HTMLElement
   );
