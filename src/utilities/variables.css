@@ -7,7 +7,7 @@
   /* Light Mode Text */
   --very-dark-blue-2: hsl(200, 15%, 8%);
 
-  /* Light Mode Input */
+  /* Universal */
   --dark-gray: hsl(0, 0%, 52%);
 
   /* Light Mode Background */
@@ -15,4 +15,7 @@
 
   /* Dark Mode Text & Light Mode Elements */
   --white: hsl(0, 0%, 100%);
+
+  /* Aspect ratio (valid on LibraryItemPage and Challenges component (added via tsx)) */
+  /* --aspect-ratio: {value} */
 }
