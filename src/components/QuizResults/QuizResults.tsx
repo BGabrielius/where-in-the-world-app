@@ -52,7 +52,6 @@ const QuizResults: React.FC<Props> = ({ correctData, selectedAnswers }) => {
 
   // side effects
   useEffect(() => {
-    if (location) console.log(location, "yeeeet");
     if (correctData && selectedAnswers && !isMounted) {
       validateSelectedAnswers();
       setIsMounted(true);
