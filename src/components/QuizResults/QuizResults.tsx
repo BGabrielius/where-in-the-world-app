@@ -52,6 +52,7 @@ const QuizResults: React.FC<Props> = ({ correctData, selectedAnswers }) => {
 
   // side effects
   useEffect(() => {
+    if (location) console.log(location, "yeeeet");
     if (correctData && selectedAnswers && !isMounted) {
       validateSelectedAnswers();
       setIsMounted(true);
@@ -287,7 +288,7 @@ const QuizResults: React.FC<Props> = ({ correctData, selectedAnswers }) => {
         )}
         <div className={styledResults.btnContainer}>
           <Button text="Back" action={() => navigate("/challenge")} />
-          <Button text="Retry" action={() => window.location.reload()} />
+          <Button text="Retry" action={() => navigate(0)} />
         </div>
       </div>
     </>
