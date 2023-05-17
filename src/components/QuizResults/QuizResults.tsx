@@ -63,13 +63,14 @@ const QuizResults: React.FC<Props> = ({ correctData, selectedAnswers }) => {
     return population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  const handleReload = () => {
-    const { pathname, search } = window.location;
-    const currentUrl = `${pathname}${search}`;
-
-    window.history.pushState(null, "", currentUrl);
-    window.location.replace(currentUrl);
-  };
+  // const handleReload = () => {
+  //   let modifiedPath = window.location.pathname.slice(
+  //     24,
+  //     window.location.pathname.length
+  //   );
+  //   console.log(modifiedPath);
+  //   navigate(modifiedPath);
+  // };
 
   const validateSelectedAnswers = () => {
     let flags = [] as String[];
@@ -295,7 +296,7 @@ const QuizResults: React.FC<Props> = ({ correctData, selectedAnswers }) => {
         )}
         <div className={styledResults.btnContainer}>
           <Button text="Back" action={() => navigate("/challenge")} />
-          <Button text="Retry" action={handleReload} />
+          <Button text="Retry" action={() => window.location.reload()} />
         </div>
       </div>
     </>
