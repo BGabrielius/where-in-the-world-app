@@ -63,15 +63,6 @@ const QuizResults: React.FC<Props> = ({ correctData, selectedAnswers }) => {
     return population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  // const handleReload = () => {
-  //   let modifiedPath = window.location.pathname.slice(
-  //     24,
-  //     window.location.pathname.length
-  //   );
-  //   console.log(modifiedPath);
-  //   navigate(modifiedPath);
-  // };
-
   const validateSelectedAnswers = () => {
     let flags = [] as String[];
     let validatedEasy = [] as Answer[];
