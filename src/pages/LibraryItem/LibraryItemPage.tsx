@@ -74,11 +74,6 @@ const LibraryItemPage = () => {
     }
   }, [data, country, countryBorders]);
 
-  // functions
-  const formatPopulation = (population: number) => {
-    return population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
   return (
     <main className={styledLibraryItem.wrapper}>
       <motion.div
@@ -224,7 +219,9 @@ const LibraryItemPage = () => {
                       transition={{ delay: 0.22 }}
                     >
                       <b>Population:</b>
-                      <p>{formatPopulation(country[0].population)}</p>
+                      <p>
+                        {new Intl.NumberFormat().format(country[0].population)}
+                      </p>
                     </motion.span>
                     <motion.span
                       variants={itemVariants}

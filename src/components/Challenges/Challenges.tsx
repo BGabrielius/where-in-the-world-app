@@ -99,7 +99,7 @@ const Challenges: React.FC<Props> = ({
           } else if (difficulty === "medium") {
             prefixArr.push(item.capital[0]);
           } else if (difficulty === "difficult") {
-            prefixArr.push(formatPopulation(item.population));
+            prefixArr.push(new Intl.NumberFormat().format(item.population));
           }
         }
       }
@@ -138,9 +138,6 @@ const Challenges: React.FC<Props> = ({
 
   const handleResultValidation = (isCorrect: boolean | null) => {
     setIsCorrect(isCorrect);
-  };
-  const formatPopulation = (population: number) => {
-    return population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   return (
@@ -228,7 +225,9 @@ const Challenges: React.FC<Props> = ({
                 </motion.h3>
                 {correctAnswer && incorrectAnswers && (
                   <QuizAnswers
-                    correct={formatPopulation(correctAnswer.difficult)}
+                    correct={new Intl.NumberFormat().format(
+                      correctAnswer.difficult
+                    )}
                     incorrect={incorrectAnswers.difficult}
                     updateStage={updateStage}
                     handleResults={handleResultValidation}

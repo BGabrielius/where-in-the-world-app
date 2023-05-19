@@ -59,10 +59,6 @@ const QuizResults: React.FC<Props> = ({ correctData, selectedAnswers }) => {
   }, [correctData, selectedAnswers, isMounted]);
 
   // functions
-  const formatPopulation = (population: number) => {
-    return population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
   const validateSelectedAnswers = () => {
     let flags = [] as String[];
     let validatedEasy = [] as Answer[];
@@ -191,7 +187,7 @@ const QuizResults: React.FC<Props> = ({ correctData, selectedAnswers }) => {
                       key={index}
                     >
                       <motion.div
-                        className={` ${styledResults.itemFlag}`}
+                        className={styledResults.itemFlag}
                         variants={itemVariants}
                         transition={{ delay: index * 0.1 }}
                       >
@@ -202,11 +198,11 @@ const QuizResults: React.FC<Props> = ({ correctData, selectedAnswers }) => {
                         />
                       </motion.div>
                       <motion.div
-                        className={` ${styledResults.itemName}`}
+                        className={styledResults.itemName}
                         variants={itemVariants}
                         transition={{ delay: index * 0.125 }}
                       >
-                        <p className={`${styledResults.resultsItem} `}>
+                        <p className={styledResults.resultsItem}>
                           {validatedAnswers.easy[index].value}
                         </p>
                         <span className={styledResults.icon}>
@@ -219,11 +215,11 @@ const QuizResults: React.FC<Props> = ({ correctData, selectedAnswers }) => {
                       </motion.div>
                       {selectedAnswers.medium && validatedAnswers.medium && (
                         <motion.div
-                          className={` ${styledResults.itemCapital}`}
+                          className={styledResults.itemCapital}
                           variants={itemVariants}
                           transition={{ delay: index * 0.15 }}
                         >
-                          <p className={`${styledResults.resultsItem} `}>
+                          <p className={styledResults.resultsItem}>
                             {validatedAnswers.medium[index].value}
                           </p>
                           <span className={styledResults.icon}>
@@ -238,12 +234,12 @@ const QuizResults: React.FC<Props> = ({ correctData, selectedAnswers }) => {
                       {selectedAnswers.difficult &&
                         validatedAnswers.difficult && (
                           <motion.div
-                            className={` ${styledResults.itemPopulation}`}
+                            className={styledResults.itemPopulation}
                             variants={itemVariants}
                             transition={{ delay: index * 0.175 }}
                           >
-                            <p className={`${styledResults.resultsItem} `}>
-                              {formatPopulation(
+                            <p className={styledResults.resultsItem}>
+                              {new Intl.NumberFormat().format(
                                 validatedAnswers.difficult[index].value
                               )}
                             </p>

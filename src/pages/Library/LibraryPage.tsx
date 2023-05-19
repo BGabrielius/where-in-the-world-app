@@ -164,9 +164,6 @@ const LibraryPage = () => {
     }
   };
   const throttledHandleScroll = throttle(handleScroll, 0);
-  const formatPopulation = (population: number) => {
-    return population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
 
   const filterByRegion = (e: any) => {
     setHost(`https://restcountries.com/v3.1/region/${e}`);
@@ -294,7 +291,7 @@ const LibraryPage = () => {
 
                   <span className={styledLibrary.countryStats}>
                     <b>Population: </b>
-                    <p>{formatPopulation(item.population)}</p>
+                    <p>{new Intl.NumberFormat().format(item.population)}</p>
                   </span>
                   <span className={styledLibrary.countryStats}>
                     <b>Region: </b>
