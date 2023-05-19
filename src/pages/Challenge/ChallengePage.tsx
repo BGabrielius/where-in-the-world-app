@@ -85,7 +85,7 @@ const ChallengePage = () => {
       >
         <div className={`${styledChallenge.container} element-full`}>
           <div className={styledChallenge.startupSettings}>
-            <h2>Challenge your geographical skills!</h2>
+            <h2>Challenge your knowledge about the countries of the world!</h2>
             <div>
               <h3>Choose the difficulty: </h3>
               <ul className={styledChallenge.difficultyContainer}>
