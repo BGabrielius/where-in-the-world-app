@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/where-in-the-world-app/static/css/main.1e7be35d.css",
-    "main.js": "/where-in-the-world-app/static/js/main.9856bcd6.js",
+    "main.js": "/where-in-the-world-app/static/js/main.7810380b.js",
     "static/css/206.5841268d.chunk.css": "/where-in-the-world-app/static/css/206.5841268d.chunk.css",
     "static/js/206.27706948.chunk.js": "/where-in-the-world-app/static/js/206.27706948.chunk.js",
-    "static/css/455.de3e1928.chunk.css": "/where-in-the-world-app/static/css/455.de3e1928.chunk.css",
-    "static/js/455.4e0e4d9d.chunk.js": "/where-in-the-world-app/static/js/455.4e0e4d9d.chunk.js",
-    "static/css/699.ce5b3cdb.chunk.css": "/where-in-the-world-app/static/css/699.ce5b3cdb.chunk.css",
-    "static/js/699.52055c8d.chunk.js": "/where-in-the-world-app/static/js/699.52055c8d.chunk.js",
+    "static/css/578.0220e96c.chunk.css": "/where-in-the-world-app/static/css/578.0220e96c.chunk.css",
+    "static/js/578.e36d0167.chunk.js": "/where-in-the-world-app/static/js/578.e36d0167.chunk.js",
+    "static/css/740.bf33f5dd.chunk.css": "/where-in-the-world-app/static/css/740.bf33f5dd.chunk.css",
+    "static/js/740.5e00c7b4.chunk.js": "/where-in-the-world-app/static/js/740.5e00c7b4.chunk.js",
     "static/css/550.40f69fe8.chunk.css": "/where-in-the-world-app/static/css/550.40f69fe8.chunk.css",
     "static/js/550.bbbe47e5.chunk.js": "/where-in-the-world-app/static/js/550.bbbe47e5.chunk.js",
     "static/css/376.ed6f09fa.chunk.css": "/where-in-the-world-app/static/css/376.ed6f09fa.chunk.css",
@@ -23,17 +23,16 @@
     "static/media/8k_earth_nightmap.jpg": "/where-in-the-world-app/static/media/8k_earth_nightmap.c0e138e9bf380cafd2c2.jpg",
     "static/media/8k_earth_specular_map.jpg": "/where-in-the-world-app/static/media/8k_earth_specular_map.7b4efa59933b470e3776.jpg",
     "static/media/8k_earth_normal_map.jpg": "/where-in-the-world-app/static/media/8k_earth_normal_map.930cf2e99bc548140c29.jpg",
-    "static/media/7r3b3p.jpg": "/where-in-the-world-app/static/media/7r3b3p.95f08cedf902d6612039.jpg",
-    "static/media/2u9d5w9hmbk41.webp": "/where-in-the-world-app/static/media/2u9d5w9hmbk41.9ace7d04cfea71f7fd8e.webp",
+    "static/media/7rdqyf.jpg": "/where-in-the-world-app/static/media/7rdqyf.ae35dfa749213695a08f.jpg",
     "index.html": "/where-in-the-world-app/index.html",
     "main.1e7be35d.css.map": "/where-in-the-world-app/static/css/main.1e7be35d.css.map",
-    "main.9856bcd6.js.map": "/where-in-the-world-app/static/js/main.9856bcd6.js.map",
+    "main.7810380b.js.map": "/where-in-the-world-app/static/js/main.7810380b.js.map",
     "206.5841268d.chunk.css.map": "/where-in-the-world-app/static/css/206.5841268d.chunk.css.map",
     "206.27706948.chunk.js.map": "/where-in-the-world-app/static/js/206.27706948.chunk.js.map",
-    "455.de3e1928.chunk.css.map": "/where-in-the-world-app/static/css/455.de3e1928.chunk.css.map",
-    "455.4e0e4d9d.chunk.js.map": "/where-in-the-world-app/static/js/455.4e0e4d9d.chunk.js.map",
-    "699.ce5b3cdb.chunk.css.map": "/where-in-the-world-app/static/css/699.ce5b3cdb.chunk.css.map",
-    "699.52055c8d.chunk.js.map": "/where-in-the-world-app/static/js/699.52055c8d.chunk.js.map",
+    "578.0220e96c.chunk.css.map": "/where-in-the-world-app/static/css/578.0220e96c.chunk.css.map",
+    "578.e36d0167.chunk.js.map": "/where-in-the-world-app/static/js/578.e36d0167.chunk.js.map",
+    "740.bf33f5dd.chunk.css.map": "/where-in-the-world-app/static/css/740.bf33f5dd.chunk.css.map",
+    "740.5e00c7b4.chunk.js.map": "/where-in-the-world-app/static/js/740.5e00c7b4.chunk.js.map",
     "550.40f69fe8.chunk.css.map": "/where-in-the-world-app/static/css/550.40f69fe8.chunk.css.map",
     "550.bbbe47e5.chunk.js.map": "/where-in-the-world-app/static/js/550.bbbe47e5.chunk.js.map",
     "376.ed6f09fa.chunk.css.map": "/where-in-the-world-app/static/css/376.ed6f09fa.chunk.css.map",
@@ -47,6 +46,6 @@
   },
   "entrypoints": [
     "static/css/main.1e7be35d.css",
-    "static/js/main.9856bcd6.js"
+    "static/js/main.7810380b.js"
   ]
 }
