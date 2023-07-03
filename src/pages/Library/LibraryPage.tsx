@@ -59,6 +59,7 @@ const LibraryPage = () => {
 
   // --- state (input)
   const [searchInputValue, setSearchInputValue] = useState<string>("");
+  const [region, setRegion] = useState<string>("");
 
   // --- state (checker)
   const [isValidNext, setIsValidNext] = useState<boolean>(false);
@@ -167,13 +168,15 @@ const LibraryPage = () => {
 
   const filterByRegion = (e: any) => {
     setHost(`https://restcountries.com/v3.1/region/${e}`);
+    setRegion(e);
     setPage(1);
     setMultiplier(1);
   };
 
   const filterBySearch = (e: any) => {
     if (!e.target.value) {
-      setHost("https://restcountries.com/v3.1/all");
+      if (region) setHost(`https://restcountries.com/v3.1/region/${region}`);
+      else setHost("https://restcountries.com/v3.1/all");
       setPage(1);
       errorCount.current = 0;
     } else if (isError || errorCount.current !== 0) {
