@@ -8,6 +8,7 @@ import axios from "axios";
 
 import styledLibraryItem from "./LibraryItemPage.module.css";
 
+import meme from "../../assets/images/7rdqyf.jpg";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const LibraryItemPage = () => {
@@ -114,237 +115,246 @@ const LibraryItemPage = () => {
           <p>Back</p>
         </span>
       </motion.div>
-      <div className={styledLibraryItem.container}>
-        {country && (
-          <>
-            <motion.div
-              className={styledLibraryItem.imgWrapper}
-              variants={containerVariants}
-              initial="initial"
-              animate="animate"
-            >
-              <div
-                className={`${styledLibraryItem.imgContainer} img-container`}
-              >
-                <img src={country[0].flags.svg} alt="" />
-              </div>
-            </motion.div>
-
-            {country[0].capital && country[0].capitalInfo.latlng ? (
+      {country && country[0].name.common === "Antarctica" ? (
+        <img src={meme} alt="meme" style={{ width: "70%" }} />
+      ) : (
+        <div className={styledLibraryItem.container}>
+          {country && (
+            <>
               <motion.div
-                className={styledLibraryItem.mapWrapper}
+                className={styledLibraryItem.imgWrapper}
                 variants={containerVariants}
                 initial="initial"
                 animate="animate"
               >
                 <div
-                  className={`${styledLibraryItem.mapContainer} map-container`}
+                  className={`${styledLibraryItem.imgContainer} img-container`}
                 >
-                  <MapContainer
-                    center={
-                      country[0].capitalInfo.latlng
-                        ? [
-                            country[0].capitalInfo.latlng[0],
-                            country[0].capitalInfo.latlng[1],
-                          ]
-                        : [country[0].latlng[0], country[0].latlng[1]]
-                    }
-                    zoom={10}
-                    scrollWheelZoom={true}
-                    minZoom={1}
-                  >
-                    <TileLayer
-                      // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                      noWrap={true}
-                    />
-                    <Marker
-                      position={
-                        country[0].capitalInfo.latlng && [
-                          country[0].capitalInfo.latlng[0],
-                          country[0].capitalInfo.latlng[1],
-                        ]
-                      }
-                    >
-                      <Popup>
-                        <b>{country[0].capital}</b> - capital city of{" "}
-                        <b>{country[0].name.common}</b>
-                      </Popup>
-                    </Marker>
-                  </MapContainer>
+                  <img src={country[0].flags.svg} alt="" />
                 </div>
               </motion.div>
-            ) : (
-              "There is no viewable land"
-            )}
-            <motion.div
-              className={styledLibraryItem.statsWrapper}
-              variants={containerVariants}
-              initial="initial"
-              animate="animate"
-              transition={{ delay: 0.1 }}
-            >
-              <div className={styledLibraryItem.countryNameContainer}>
-                <motion.h2
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: [0, 0, 1] }}
-                  transition={{ duration: 1 }}
-                  className={styledLibraryItem.countryName}
-                >
-                  {country[0].name.common}
-                </motion.h2>
-              </div>
 
-              <div className={styledLibraryItem.statsContainer}>
-                <div className={styledLibraryItem.stats}>
-                  <div className={styledLibraryItem.statsLeft}>
-                    <motion.span
-                      variants={itemVariants}
-                      initial="initial"
-                      animate="animate"
-                      transition={{ delay: 0.18 }}
-                    >
-                      <b>Native Name:</b>
-                      <p>
-                        {
-                          Object.values<any>(country[0].name.nativeName)[0]
-                            .common
-                        }
-                      </p>
-                    </motion.span>
-                    <motion.span
-                      variants={itemVariants}
-                      initial="initial"
-                      animate="animate"
-                      transition={{ delay: 0.22 }}
-                    >
-                      <b>Population:</b>
-                      <p>
-                        {new Intl.NumberFormat().format(country[0].population)}
-                      </p>
-                    </motion.span>
-                    <motion.span
-                      variants={itemVariants}
-                      initial="initial"
-                      animate="animate"
-                      transition={{ delay: 0.26 }}
-                    >
-                      <b>Region:</b>
-                      <p>{country[0].region}</p>
-                    </motion.span>
-                    <motion.span
-                      variants={itemVariants}
-                      initial="initial"
-                      animate="animate"
-                      transition={{ delay: 0.3 }}
-                    >
-                      <b>Sub Region:</b>
-                      <p>{country[0].subregion}</p>
-                    </motion.span>
-                    <motion.span
-                      variants={itemVariants}
-                      initial="initial"
-                      animate="animate"
-                      transition={{ delay: 0.34 }}
-                    >
-                      <b>Capital:</b>
-                      <p>{country[0].capital}</p>
-                    </motion.span>
-                  </div>
-                  <div style={{ display: "flex" }}>
-                    <motion.div
-                      className={styledLibraryItem.line}
-                      variants={itemVariants}
-                      initial="initial"
-                      animate="animate"
-                      transition={{ delay: 0.36 }}
-                    ></motion.div>
-                    <div className={styledLibraryItem.statsRight}>
-                      <motion.span
-                        variants={itemVariants}
-                        initial="initial"
-                        animate="animate"
-                        transition={{ delay: 0.38 }}
-                      >
-                        <b>Top Level Domain:</b>
-                        <p>{country[0].tld}</p>
-                      </motion.span>
-                      <motion.span
-                        variants={itemVariants}
-                        initial="initial"
-                        animate="animate"
-                        transition={{ delay: 0.42 }}
-                      >
-                        <b>Currencies:</b>
-                        <p>
-                          {country[0].currencies
-                            ? Object.values<any>(country[0].currencies)[0].name
-                            : ""}
-                        </p>
-                      </motion.span>
-                      <motion.span
-                        variants={itemVariants}
-                        initial="initial"
-                        animate="animate"
-                        transition={{ delay: 0.46 }}
-                      >
-                        <b>Languages:</b>
-                        <p>
-                          {Object.values<any>(country[0].languages).join(", ")}
-                        </p>
-                      </motion.span>
-                    </div>
-                  </div>
-                </div>
+              {country[0].capital && country[0].capitalInfo.latlng ? (
                 <motion.div
-                  className={styledLibraryItem.bordersContainer}
+                  className={styledLibraryItem.mapWrapper}
                   variants={containerVariants}
                   initial="initial"
                   animate="animate"
-                  transition={{ delay: 0.5 }}
                 >
-                  <motion.b
-                    variants={itemVariants}
+                  <div
+                    className={`${styledLibraryItem.mapContainer} map-container`}
+                  >
+                    <MapContainer
+                      center={
+                        country[0].capitalInfo.latlng
+                          ? [
+                              country[0].capitalInfo.latlng[0],
+                              country[0].capitalInfo.latlng[1],
+                            ]
+                          : [country[0].latlng[0], country[0].latlng[1]]
+                      }
+                      zoom={10}
+                      scrollWheelZoom={true}
+                      minZoom={1}
+                    >
+                      <TileLayer
+                        // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        noWrap={true}
+                      />
+                      <Marker
+                        position={
+                          country[0].capitalInfo.latlng && [
+                            country[0].capitalInfo.latlng[0],
+                            country[0].capitalInfo.latlng[1],
+                          ]
+                        }
+                      >
+                        <Popup>
+                          <b>{country[0].capital}</b> - capital city of{" "}
+                          <b>{country[0].name.common}</b>
+                        </Popup>
+                      </Marker>
+                    </MapContainer>
+                  </div>
+                </motion.div>
+              ) : (
+                "There is no viewable land"
+              )}
+              <motion.div
+                className={styledLibraryItem.statsWrapper}
+                variants={containerVariants}
+                initial="initial"
+                animate="animate"
+                transition={{ delay: 0.1 }}
+              >
+                <div className={styledLibraryItem.countryNameContainer}>
+                  <motion.h2
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: [0, 0, 1] }}
+                    transition={{ duration: 1 }}
+                    className={styledLibraryItem.countryName}
+                  >
+                    {country[0].name.common}
+                  </motion.h2>
+                </div>
+
+                <div className={styledLibraryItem.statsContainer}>
+                  <div className={styledLibraryItem.stats}>
+                    <div className={styledLibraryItem.statsLeft}>
+                      <motion.span
+                        variants={itemVariants}
+                        initial="initial"
+                        animate="animate"
+                        transition={{ delay: 0.18 }}
+                      >
+                        <b>Native Name:</b>
+                        <p>
+                          {
+                            Object.values<any>(country[0].name.nativeName)[0]
+                              .common
+                          }
+                        </p>
+                      </motion.span>
+                      <motion.span
+                        variants={itemVariants}
+                        initial="initial"
+                        animate="animate"
+                        transition={{ delay: 0.22 }}
+                      >
+                        <b>Population:</b>
+                        <p>
+                          {new Intl.NumberFormat().format(
+                            country[0].population
+                          )}
+                        </p>
+                      </motion.span>
+                      <motion.span
+                        variants={itemVariants}
+                        initial="initial"
+                        animate="animate"
+                        transition={{ delay: 0.26 }}
+                      >
+                        <b>Region:</b>
+                        <p>{country[0].region}</p>
+                      </motion.span>
+                      <motion.span
+                        variants={itemVariants}
+                        initial="initial"
+                        animate="animate"
+                        transition={{ delay: 0.3 }}
+                      >
+                        <b>Sub Region:</b>
+                        <p>{country[0].subregion}</p>
+                      </motion.span>
+                      <motion.span
+                        variants={itemVariants}
+                        initial="initial"
+                        animate="animate"
+                        transition={{ delay: 0.34 }}
+                      >
+                        <b>Capital:</b>
+                        <p>{country[0].capital}</p>
+                      </motion.span>
+                    </div>
+                    <div style={{ display: "flex" }}>
+                      <motion.div
+                        className={styledLibraryItem.line}
+                        variants={itemVariants}
+                        initial="initial"
+                        animate="animate"
+                        transition={{ delay: 0.36 }}
+                      ></motion.div>
+                      <div className={styledLibraryItem.statsRight}>
+                        <motion.span
+                          variants={itemVariants}
+                          initial="initial"
+                          animate="animate"
+                          transition={{ delay: 0.38 }}
+                        >
+                          <b>Top Level Domain:</b>
+                          <p>{country[0].tld}</p>
+                        </motion.span>
+                        <motion.span
+                          variants={itemVariants}
+                          initial="initial"
+                          animate="animate"
+                          transition={{ delay: 0.42 }}
+                        >
+                          <b>Currencies:</b>
+                          <p>
+                            {country[0].currencies
+                              ? Object.values<any>(country[0].currencies)[0]
+                                  .name
+                              : ""}
+                          </p>
+                        </motion.span>
+                        <motion.span
+                          variants={itemVariants}
+                          initial="initial"
+                          animate="animate"
+                          transition={{ delay: 0.46 }}
+                        >
+                          <b>Languages:</b>
+                          <p>
+                            {Object.values<any>(country[0].languages).join(
+                              ", "
+                            )}
+                          </p>
+                        </motion.span>
+                      </div>
+                    </div>
+                  </div>
+                  <motion.div
+                    className={styledLibraryItem.bordersContainer}
+                    variants={containerVariants}
                     initial="initial"
                     animate="animate"
-                    transition={{ delay: 0.54 }}
+                    transition={{ delay: 0.5 }}
                   >
-                    Border Countries:
-                  </motion.b>
-                  {isLoading ? (
-                    <span className="country-borders-container">
-                      loading...
-                    </span>
-                  ) : borders ? (
-                    borders.map((item: any, index: number) => (
+                    <motion.b
+                      variants={itemVariants}
+                      initial="initial"
+                      animate="animate"
+                      transition={{ delay: 0.54 }}
+                    >
+                      Border Countries:
+                    </motion.b>
+                    {isLoading ? (
+                      <span className="country-borders-container">
+                        loading...
+                      </span>
+                    ) : borders ? (
+                      borders.map((item: any, index: number) => (
+                        <motion.span
+                          key={`${item.name.common}${index}`}
+                          className="country-borders-container"
+                          variants={itemVariants}
+                          initial="initial"
+                          animate="animate"
+                          transition={{ delay: 0.58 }}
+                        >
+                          {item.name.common}
+                        </motion.span>
+                      ))
+                    ) : (
                       <motion.span
-                        key={`${item.name.common}${index}`}
                         className="country-borders-container"
                         variants={itemVariants}
                         initial="initial"
                         animate="animate"
                         transition={{ delay: 0.58 }}
                       >
-                        {item.name.common}
+                        This country has no borders
                       </motion.span>
-                    ))
-                  ) : (
-                    <motion.span
-                      className="country-borders-container"
-                      variants={itemVariants}
-                      initial="initial"
-                      animate="animate"
-                      transition={{ delay: 0.58 }}
-                    >
-                      This country has no borders
-                    </motion.span>
-                  )}
-                </motion.div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </div>
+                    )}
+                  </motion.div>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </div>
+      )}
     </main>
   );
 };
