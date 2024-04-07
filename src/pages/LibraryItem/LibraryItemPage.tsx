@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "react-query";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { motion } from "framer-motion";
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { motion } from 'framer-motion';
 
-import axios from "axios";
+import axios from 'axios';
 
-import styledLibraryItem from "./LibraryItemPage.module.css";
+import styledLibraryItem from './LibraryItemPage.module.css';
 
-import meme from "../../assets/images/7rdqyf.jpg";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import meme from '../../assets/images/7rdqyf.jpg';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 const LibraryItemPage = () => {
   const { id } = useParams();
@@ -22,13 +22,13 @@ const LibraryItemPage = () => {
   const [borders, setBorders] = useState<string[]>();
 
   // svg aspect ratio
-  const svgUrl: string = country ? country[0].flags.png : "";
+  const svgUrl: string = country ? country[0].flags.png : '';
   const img = new Image();
 
   img.onload = () => {
     const aspectRatio = img.width / img.height;
     document.documentElement.style.setProperty(
-      "--aspect-ratio",
+      '--aspect-ratio',
       `${aspectRatio}`
     );
   };
@@ -44,7 +44,7 @@ const LibraryItemPage = () => {
     animate: { scale: 1, x: 0 },
   };
   // query
-  const { data } = useQuery(["country", id], async () => {
+  const { data } = useQuery(['country', id], async () => {
     const data = await axios.get(
       `https://restcountries.com/v3.1/name/${id}?fullText=true`
     );
@@ -54,7 +54,7 @@ const LibraryItemPage = () => {
   const border = data?.data[0].borders;
 
   const { data: countryBorders, isLoading } = useQuery(
-    ["borders", border],
+    ['borders', border],
     async () => {
       return await axios.get(
         `https://restcountries.com/v3.1/alpha?codes=${border.toString()}`
@@ -79,18 +79,18 @@ const LibraryItemPage = () => {
     <main className={styledLibraryItem.wrapper}>
       <motion.div
         className={`${styledLibraryItem.btn} btn-back`}
-        onClick={() => navigate("/library")}
+        onClick={() => navigate('/library')}
         variants={itemVariants}
-        initial="initial"
-        animate="animate"
+        initial='initial'
+        animate='animate'
         transition={{ delay: 0.5 }}
       >
         <span
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "0.5em",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '0.5em',
           }}
         >
           <motion.span
@@ -105,9 +105,9 @@ const LibraryItemPage = () => {
               duration: 0.75,
             }}
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
             <AiOutlineArrowLeft />
@@ -115,8 +115,8 @@ const LibraryItemPage = () => {
           <p>Back</p>
         </span>
       </motion.div>
-      {country && country[0].name.common === "Antarctica" ? (
-        <img src={meme} alt="meme" style={{ width: "70%" }} />
+      {country && country[0].name.common === 'Antarctica' ? (
+        <img src={meme} alt='meme' style={{ width: '70%' }} />
       ) : (
         <div className={styledLibraryItem.container}>
           {country && (
@@ -124,13 +124,13 @@ const LibraryItemPage = () => {
               <motion.div
                 className={styledLibraryItem.imgWrapper}
                 variants={containerVariants}
-                initial="initial"
-                animate="animate"
+                initial='initial'
+                animate='animate'
               >
                 <div
                   className={`${styledLibraryItem.imgContainer} img-container`}
                 >
-                  <img src={country[0].flags.svg} alt="" />
+                  <img src={country[0].flags.svg} alt='' />
                 </div>
               </motion.div>
 
@@ -138,8 +138,8 @@ const LibraryItemPage = () => {
                 <motion.div
                   className={styledLibraryItem.mapWrapper}
                   variants={containerVariants}
-                  initial="initial"
-                  animate="animate"
+                  initial='initial'
+                  animate='animate'
                 >
                   <div
                     className={`${styledLibraryItem.mapContainer} map-container`}
@@ -159,7 +159,7 @@ const LibraryItemPage = () => {
                     >
                       <TileLayer
                         // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                         noWrap={true}
                       />
                       <Marker
@@ -171,7 +171,7 @@ const LibraryItemPage = () => {
                         }
                       >
                         <Popup>
-                          <b>{country[0].capital}</b> - capital city of{" "}
+                          <b>{country[0].capital}</b> - capital city of{' '}
                           <b>{country[0].name.common}</b>
                         </Popup>
                       </Marker>
@@ -179,13 +179,13 @@ const LibraryItemPage = () => {
                   </div>
                 </motion.div>
               ) : (
-                "There is no viewable land"
+                'There is no viewable land'
               )}
               <motion.div
                 className={styledLibraryItem.statsWrapper}
                 variants={containerVariants}
-                initial="initial"
-                animate="animate"
+                initial='initial'
+                animate='animate'
                 transition={{ delay: 0.1 }}
               >
                 <div className={styledLibraryItem.countryNameContainer}>
@@ -204,8 +204,8 @@ const LibraryItemPage = () => {
                     <div className={styledLibraryItem.statsLeft}>
                       <motion.span
                         variants={itemVariants}
-                        initial="initial"
-                        animate="animate"
+                        initial='initial'
+                        animate='animate'
                         transition={{ delay: 0.18 }}
                       >
                         <b>Native Name:</b>
@@ -218,8 +218,8 @@ const LibraryItemPage = () => {
                       </motion.span>
                       <motion.span
                         variants={itemVariants}
-                        initial="initial"
-                        animate="animate"
+                        initial='initial'
+                        animate='animate'
                         transition={{ delay: 0.22 }}
                       >
                         <b>Population:</b>
@@ -231,8 +231,8 @@ const LibraryItemPage = () => {
                       </motion.span>
                       <motion.span
                         variants={itemVariants}
-                        initial="initial"
-                        animate="animate"
+                        initial='initial'
+                        animate='animate'
                         transition={{ delay: 0.26 }}
                       >
                         <b>Region:</b>
@@ -240,8 +240,8 @@ const LibraryItemPage = () => {
                       </motion.span>
                       <motion.span
                         variants={itemVariants}
-                        initial="initial"
-                        animate="animate"
+                        initial='initial'
+                        animate='animate'
                         transition={{ delay: 0.3 }}
                       >
                         <b>Sub Region:</b>
@@ -249,27 +249,27 @@ const LibraryItemPage = () => {
                       </motion.span>
                       <motion.span
                         variants={itemVariants}
-                        initial="initial"
-                        animate="animate"
+                        initial='initial'
+                        animate='animate'
                         transition={{ delay: 0.34 }}
                       >
                         <b>Capital:</b>
                         <p>{country[0].capital}</p>
                       </motion.span>
                     </div>
-                    <div style={{ display: "flex" }}>
+                    <div style={{ display: 'flex' }}>
                       <motion.div
                         className={styledLibraryItem.line}
                         variants={itemVariants}
-                        initial="initial"
-                        animate="animate"
+                        initial='initial'
+                        animate='animate'
                         transition={{ delay: 0.36 }}
                       ></motion.div>
                       <div className={styledLibraryItem.statsRight}>
                         <motion.span
                           variants={itemVariants}
-                          initial="initial"
-                          animate="animate"
+                          initial='initial'
+                          animate='animate'
                           transition={{ delay: 0.38 }}
                         >
                           <b>Top Level Domain:</b>
@@ -277,8 +277,8 @@ const LibraryItemPage = () => {
                         </motion.span>
                         <motion.span
                           variants={itemVariants}
-                          initial="initial"
-                          animate="animate"
+                          initial='initial'
+                          animate='animate'
                           transition={{ delay: 0.42 }}
                         >
                           <b>Currencies:</b>
@@ -286,19 +286,19 @@ const LibraryItemPage = () => {
                             {country[0].currencies
                               ? Object.values<any>(country[0].currencies)[0]
                                   .name
-                              : ""}
+                              : ''}
                           </p>
                         </motion.span>
                         <motion.span
                           variants={itemVariants}
-                          initial="initial"
-                          animate="animate"
+                          initial='initial'
+                          animate='animate'
                           transition={{ delay: 0.46 }}
                         >
                           <b>Languages:</b>
                           <p>
                             {Object.values<any>(country[0].languages).join(
-                              ", "
+                              ', '
                             )}
                           </p>
                         </motion.span>
@@ -308,41 +308,44 @@ const LibraryItemPage = () => {
                   <motion.div
                     className={styledLibraryItem.bordersContainer}
                     variants={containerVariants}
-                    initial="initial"
-                    animate="animate"
+                    initial='initial'
+                    animate='animate'
                     transition={{ delay: 0.5 }}
                   >
                     <motion.b
                       variants={itemVariants}
-                      initial="initial"
-                      animate="animate"
+                      initial='initial'
+                      animate='animate'
                       transition={{ delay: 0.54 }}
                     >
                       Border Countries:
                     </motion.b>
                     {isLoading ? (
-                      <span className="country-borders-container">
+                      <span className='country-borders-container'>
                         loading...
                       </span>
                     ) : borders ? (
                       borders.map((item: any, index: number) => (
                         <motion.span
                           key={`${item.name.common}${index}`}
-                          className="country-borders-container"
+                          className='country-borders-container'
                           variants={itemVariants}
-                          initial="initial"
-                          animate="animate"
+                          initial='initial'
+                          animate='animate'
                           transition={{ delay: 0.58 }}
+                          onClick={() =>
+                            navigate(`/library/${item.name.common}`)
+                          }
                         >
                           {item.name.common}
                         </motion.span>
                       ))
                     ) : (
                       <motion.span
-                        className="country-borders-container"
+                        className='country-borders-container'
                         variants={itemVariants}
-                        initial="initial"
-                        animate="animate"
+                        initial='initial'
+                        animate='animate'
                         transition={{ delay: 0.58 }}
                       >
                         This country has no borders

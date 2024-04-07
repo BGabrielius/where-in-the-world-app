@@ -167,6 +167,11 @@
   color: var(--very-dark-blue-2);
   box-shadow: 0 0 3px 3px rgb(233, 233, 233);
 }
+#light .country-borders-container:hover {
+  cursor: pointer;
+  box-shadow: 0 0 9px 9px rgb(233, 233, 233);
+  transition: 0.25s;
+}
 
 /*--- Dark Mode ---*/
 /*---- button (back) ----*/
@@ -189,6 +194,11 @@
   background-color: var(--dark-blue);
   color: var(--white);
   box-shadow: 0 0 3px 3px hsl(209, 22%, 34%);
+}
+#dark .country-borders-container:hover {
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 0 9px 9px hsl(209, 22%, 34%);
 }
 
 /* ----------------------- */
