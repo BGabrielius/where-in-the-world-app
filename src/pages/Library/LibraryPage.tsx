@@ -50,7 +50,7 @@ const LibraryPage = () => {
 
   // -- state
   const [host, setHost] = useState<string>(
-    "https://restcountries.com/v3.1/all"
+    "https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital"
   );
   const [countries, setCountries] = useState<any>();
   const [message, setMessage] = useState<string>("");
@@ -176,7 +176,7 @@ const LibraryPage = () => {
   const filterBySearch = (e: any) => {
     if (!e.target.value) {
       if (region) setHost(`https://restcountries.com/v3.1/region/${region}`);
-      else setHost("https://restcountries.com/v3.1/all");
+      else setHost("https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital");
       setPage(1);
       errorCount.current = 0;
     } else if (isError || errorCount.current !== 0) {
@@ -281,7 +281,7 @@ const LibraryPage = () => {
                 <div className={styledLibrary.flagContainer}>
                   <img
                     src={item.flags.png}
-                    alt={item.cca2}
+                    alt={item.name.common + " flag"}
                     className={styledLibrary.flag}
                   />
                 </div>
