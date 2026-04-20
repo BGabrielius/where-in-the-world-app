@@ -280,7 +280,7 @@ const LibraryPage = () => {
               >
                 <div className={styledLibrary.flagContainer}>
                   <img
-                    src={item.flags.png}
+                    src={item.flags.png ? item.flags.png : item.flags.svg}
                     alt={item.name.common + " flag"}
                     className={styledLibrary.flag}
                   />
