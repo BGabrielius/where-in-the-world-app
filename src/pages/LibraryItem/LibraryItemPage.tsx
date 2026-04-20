@@ -333,9 +333,10 @@ const LibraryItemPage = () => {
                           initial='initial'
                           animate='animate'
                           transition={{ delay: 0.58 }}
-                          onClick={() =>
+                          onClick={() => {
+                            setCountry(null)
                             navigate(`/library/${item.name.common}`)
-                          }
+                          }}
                         >
                           {item.name.common}
                         </motion.span>
