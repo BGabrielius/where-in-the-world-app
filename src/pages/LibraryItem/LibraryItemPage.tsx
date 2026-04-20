@@ -145,7 +145,7 @@ const LibraryItemPage = () => {
                     className={`${styledLibraryItem.mapContainer} map-container`}
                   >
                     <MapContainer
-                      center={
+                      center={country[0].capitalInfo.latlng &&
                         country[0].capitalInfo.latlng
                           ? [
                               country[0].capitalInfo.latlng[0],
@@ -334,7 +334,7 @@ const LibraryItemPage = () => {
                           animate='animate'
                           transition={{ delay: 0.58 }}
                           onClick={() => {
-                            setCountry(null)
+                            
                             navigate(`/library/${item.name.common}`)
                           }}
                         >
