@@ -47,7 +47,7 @@ const QuizPage = () => {
   // side effects
   useEffect(() => {
     if (region === "All") {
-      setHost("https://restcountries.com/v3.1/all");
+      setHost("https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital");
     } else if (region !== "All") {
       setHost(`https://restcountries.com/v3.1/region/${region}`);
     }
