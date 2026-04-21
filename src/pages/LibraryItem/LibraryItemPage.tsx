@@ -145,7 +145,7 @@ const LibraryItemPage = () => {
                     className={`${styledLibraryItem.mapContainer} map-container`}
                   >
                     <MapContainer
-                      center={country[0].capitalInfo.latlng &&
+                      center={country[0] &&
                         country[0].capitalInfo.latlng
                           ? [
                               country[0].capitalInfo.latlng[0],
